@@ -1,0 +1,1339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Miguel Mondragon | Computer Engineering Portfolio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* Base styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Courier New', Courier, monospace;
+      background-color: #000;
+      color: #fff;
+      line-height: 1.6;
+      position: relative;
+      min-height: 100vh;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style-position: inside;
+    }
+
+    /* Container */
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* Terminal effect */
+    .terminal-effect {
+      position: relative;
+    }
+
+    .terminal-effect::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgba(32, 178, 170, 0.05) 50%,
+        transparent 100%
+      );
+      background-size: 100% 8px;
+      animation: terminal-scan 8s linear infinite;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    @keyframes terminal-scan {
+      0% {
+        background-position: 0% 0%;
+      }
+      100% {
+        background-position: 0% 100%;
+      }
+    }
+
+    /* Glitch text effect */
+    .glitch-text {
+      position: relative;
+      animation: glitch 3s infinite;
+    }
+
+    @keyframes glitch {
+      0% {
+        text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75),
+                    -0.05em -0.025em 0 rgba(0, 255, 0, 0.75),
+                    0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
+      }
+      14% {
+        text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75),
+                    -0.05em -0.025em 0 rgba(0, 255, 0, 0.75),
+                    0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
+      }
+      15% {
+        text-shadow: -0.05em -0.025em 0 rgba(255, 0, 0, 0.75),
+                    0.025em 0.025em 0 rgba(0, 255, 0, 0.75),
+                    -0.05em -0.05em 0 rgba(0, 0, 255, 0.75);
+      }
+      49% {
+        text-shadow: -0.05em -0.025em 0 rgba(255, 0, 0, 0.75),
+                    0.025em 0.025em 0 rgba(0, 255, 0, 0.75),
+                    -0.05em -0.05em 0 rgba(0, 0, 255, 0.75);
+      }
+      50% {
+        text-shadow: 0.025em 0.05em 0 rgba(255, 0, 0, 0.75),
+                    0.05em 0 0 rgba(0, 255, 0, 0.75),
+                    0 -0.05em 0 rgba(0, 0, 255, 0.75);
+      }
+      99% {
+        text-shadow: 0.025em 0.05em 0 rgba(255, 0, 0, 0.75),
+                    0.05em 0 0 rgba(0, 255, 0, 0.75),
+                    0 -0.05em 0 rgba(0, 0, 255, 0.75);
+      }
+      100% {
+        text-shadow: -0.025em 0 0 rgba(255, 0, 0, 0.75),
+                    -0.025em -0.025em 0 rgba(0, 255, 0, 0.75),
+                    -0.025em -0.05em 0 rgba(0, 0, 255, 0.75);
+      }
+    }
+
+    /* Typewriter effect */
+    .typewriter-text {
+      overflow: hidden;
+      border-right: 0.15em solid #22c55e;
+      white-space: nowrap;
+      margin: 0 auto;
+      letter-spacing: 0.15em;
+      animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+    }
+
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+
+    @keyframes blink-caret {
+      from, to { border-color: transparent }
+      50% { border-color: #22c55e }
+    }
+
+    /* Typing effect */
+    .typing-effect {
+      overflow: hidden;
+      border-right: 0.15em solid #22c55e;
+      white-space: nowrap;
+      animation: typing 3.5s steps(30, end) infinite alternate, blink-caret 0.75s step-end infinite;
+    }
+
+    /* Header */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      width: 100%;
+      border-bottom: 1px solid rgba(220, 38, 38, 0.5);
+      background-color: rgba(0, 0, 0, 0.9);
+      backdrop-filter: blur(4px);
+    }
+
+    .header-content {
+      display: flex;
+      height: 4rem;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .logo-text {
+      font-family: monospace;
+      font-size: 1.25rem;
+      font-weight: bold;
+      letter-spacing: -0.025em;
+      color: #22c55e;
+    }
+
+    nav {
+      display: none;
+    }
+
+    .social-links {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .social-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.5rem;
+      height: 2.5rem;
+      color: #d1d5db;
+      border-radius: 0.375rem;
+      transition: all 0.2s;
+    }
+
+    .social-link:hover {
+      color: #fff;
+      background-color: rgba(34, 197, 94, 0.2);
+    }
+
+    /* Hero section */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 6rem 0 8rem;
+      border-bottom: 1px solid rgba(220, 38, 38, 0.3);
+      text-align: center;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('https://placehold.co/1920x1080');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.1;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .security-badge {
+      display: inline-block;
+      padding: 0.25rem;
+      border: 1px solid #dc2626;
+      background-color: rgba(0, 0, 0, 0.5);
+      border-radius: 0.375rem;
+      margin-bottom: 1rem;
+    }
+
+    .security-badge-text {
+      font-size: 0.75rem;
+      color: #dc2626;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.25rem;
+    }
+
+    .security-badge-subtext {
+      font-size: 0.75rem;
+      color: #22c55e;
+    }
+
+    .hero-title {
+      font-family: monospace;
+      font-size: 2.25rem;
+      font-weight: bold;
+      letter-spacing: -0.05em;
+      margin-bottom: 1rem;
+    }
+
+    .hero-title-green {
+      color: #22c55e;
+    }
+
+    .hero-title-red {
+      color: #dc2626;
+    }
+
+    .hero-subtitle {
+      max-width: 42rem;
+      font-size: 1.25rem;
+      color: #9ca3af;
+      margin-bottom: 2rem;
+    }
+
+    .button-group {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.5rem 1rem;
+      font-weight: 500;
+      border-radius: 0.375rem;
+      transition: all 0.2s;
+    }
+
+    .btn-primary {
+      background-color: #7f1d1d;
+      color: #fff;
+      border: 1px solid #dc2626;
+    }
+
+    .btn-primary:hover {
+      background-color: #991b1b;
+    }
+
+    .btn-outline {
+      background-color: transparent;
+      color: #22c55e;
+      border: 1px solid #15803d;
+    }
+
+    .btn-outline:hover {
+      background-color: rgba(34, 197, 94, 0.2);
+    }
+
+    .btn-icon {
+      margin-left: 0.5rem;
+    }
+
+    .scroll-down {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0) translateX(-50%);
+      }
+      40% {
+        transform: translateY(-30px) translateX(-50%);
+      }
+      60% {
+        transform: translateY(-15px) translateX(-50%);
+      }
+    }
+
+    /* Section styles */
+    section {
+      padding: 4rem 0;
+      border-bottom: 1px solid rgba(220, 38, 38, 0.3);
+      position: relative;
+    }
+
+    .section-corner-tl {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 8rem;
+      height: 8rem;
+      background-color: rgba(220, 38, 38, 0.1);
+      border-bottom-left-radius: 100%;
+    }
+
+    .section-corner-br {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 8rem;
+      height: 8rem;
+      background-color: rgba(34, 197, 94, 0.1);
+      border-top-right-radius: 100%;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .pulse-dot {
+      height: 1rem;
+      width: 1rem;
+      background-color: #22c55e;
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    .pulse-dot-red {
+      background-color: #dc2626;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+      }
+      
+      70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 10px rgba(34, 197, 94, 0);
+      }
+      
+      100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+      }
+    }
+
+    .section-title {
+      font-family: monospace;
+      font-size: 1.875rem;
+      font-weight: bold;
+      letter-spacing: -0.025em;
+      color: #22c55e;
+    }
+
+    .section-title-red {
+      color: #dc2626;
+    }
+
+    .section-icon {
+      display: inline-block;
+      margin-right: 0.5rem;
+      vertical-align: middle;
+    }
+
+    /* Grid layout */
+    .grid {
+      display: grid;
+      gap: 2rem;
+    }
+
+    .grid-cols-1 {
+      grid-template-columns: 1fr;
+    }
+
+    /* Card styles */
+    .card {
+      background-color: #000;
+      border: 1px solid rgba(34, 197, 94, 0.5);
+      border-radius: 0.5rem;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 0 10px rgba(34, 197, 94, 0.2);
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, #dc2626, #22c55e);
+    }
+
+    .card-red {
+      border: 1px solid rgba(220, 38, 38, 0.5);
+    }
+
+    .card-header {
+      padding: 1.5rem;
+      border-bottom: 1px solid rgba(220, 38, 38, 0.3);
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      color: #fff;
+      margin-bottom: 0.25rem;
+    }
+
+    .card-description {
+      color: #9ca3af;
+      font-size: 0.875rem;
+    }
+
+    .card-content {
+      padding: 1.5rem;
+    }
+
+    /* Terminal window */
+    .terminal-window {
+      background-color: rgba(0, 0, 0, 0.8);
+      padding: 1.5rem;
+      border: 1px solid rgba(34, 197, 94, 0.5);
+      border-radius: 0.375rem;
+    }
+
+    .terminal-header {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid rgba(220, 38, 38, 0.3);
+    }
+
+    .terminal-dot {
+      height: 0.75rem;
+      width: 0.75rem;
+      border-radius: 50%;
+    }
+
+    .terminal-dot-red {
+      background-color: #ef4444;
+    }
+
+    .terminal-dot-yellow {
+      background-color: #eab308;
+    }
+
+    .terminal-dot-green {
+      background-color: #22c55e;
+    }
+
+    .terminal-path {
+      font-size: 0.75rem;
+      color: #9ca3af;
+      margin-left: 0.5rem;
+    }
+
+    .terminal-content {
+      font-family: 'Courier New', Courier, monospace;
+    }
+
+    .terminal-line {
+      margin-bottom: 0.5rem;
+      line-height: 1.5;
+      color: #22c55e;
+    }
+
+    .terminal-prompt {
+      color: #dc2626;
+    }
+
+    .terminal-cursor {
+      display: inline-block;
+      width: 0.5rem;
+      height: 1rem;
+      background-color: #22c55e;
+      animation: blink 1s step-end infinite;
+      margin-top: 1rem;
+    }
+
+    @keyframes blink {
+      from, to { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    /* Badge styles */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.25rem 0.75rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+      border-radius: 9999px;
+      background-color: rgba(34, 197, 94, 0.5);
+      color: #4ade80;
+      border: 1px solid rgba(34, 197, 94, 0.5);
+    }
+
+    .badge-red {
+      background-color: rgba(220, 38, 38, 0.5);
+      color: #f87171;
+      border: 1px solid rgba(220, 38, 38, 0.5);
+    }
+
+    /* Progress bar */
+    .progress-container {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(220, 38, 38, 0.3);
+    }
+
+    .progress-label {
+      font-size: 0.75rem;
+      color: #dc2626;
+      margin-bottom: 0.5rem;
+    }
+
+    .progress-bar {
+      width: 100%;
+      background-color: #1f2937;
+      border-radius: 9999px;
+      height: 0.625rem;
+    }
+
+    .progress-value {
+      background-color: #22c55e;
+      height: 0.625rem;
+      border-radius: 9999px;
+    }
+
+    .progress-value-red {
+      background-color: #dc2626;
+    }
+
+    .progress-stats {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      margin-top: 0.25rem;
+    }
+
+    .progress-label-text {
+      color: #9ca3af;
+    }
+
+    .progress-value-text {
+      color: #22c55e;
+    }
+
+    .progress-value-text-red {
+      color: #dc2626;
+    }
+
+    /* Badge group */
+    .badge-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    /* List styles */
+    .list {
+      list-style-type: disc;
+      padding-left: 1.25rem;
+      margin-bottom: 1rem;
+    }
+
+    .list-item {
+      margin-bottom: 0.5rem;
+      color: #22c55e;
+    }
+
+    .list-item-red {
+      color: #f87171;
+    }
+
+    /* Status indicator */
+    .status-indicator {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .status-dot {
+      height: 0.75rem;
+      width: 0.75rem;
+      background-color: #22c55e;
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    .status-text {
+      color: #4ade80;
+      font-size: 0.875rem;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid rgba(220, 38, 38, 0.5);
+      padding: 1.5rem 0;
+      background-color: #000;
+    }
+
+    .footer-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .footer-logo-text {
+      font-family: monospace;
+      font-size: 0.875rem;
+      font-weight: bold;
+    }
+
+    .footer-logo-text-red {
+      color: #dc2626;
+    }
+
+    .footer-logo-text-green {
+      color: #22c55e;
+    }
+
+    .footer-info {
+      text-align: center;
+    }
+
+    .footer-copyright {
+      font-size: 0.875rem;
+      color: #9ca3af;
+    }
+
+    .footer-security {
+      font-size: 0.75rem;
+      color: #dc2626;
+      margin-top: 0.25rem;
+    }
+
+    /* Responsive styles */
+    @media (min-width: 768px) {
+      nav {
+        display: flex;
+        gap: 1.5rem;
+      }
+
+      .nav-link {
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: #d1d5db;
+        transition: color 0.2s;
+      }
+
+      .nav-link:hover {
+        color: #22c55e;
+      }
+
+      .hero-title {
+        font-size: 3.75rem;
+      }
+
+      .hero-subtitle {
+        font-size: 1.5rem;
+      }
+
+      .button-group {
+        flex-direction: row;
+      }
+
+      .grid-cols-2 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .footer-content {
+        flex-direction: row;
+        justify-content: space-between;
+      }
+
+      .footer-logo {
+        margin-bottom: 0;
+      }
+
+      .footer-info {
+        text-align: right;
+      }
+    }
+  </style>
+</head>
+<body class="terminal-effect">
+  <div class="absolute inset-0 bg-cover bg-center opacity-5 pointer-events-none" style="background-image: url('https://placehold.co/1920x1080');"></div>
+  
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <div class="header-content">
+        <div class="logo">
+          <i class="fa-solid fa-shield-halved text-red-600"></i>
+          <span class="logo-text typing-effect">MIGUEL_MONDRAGON</span>
+        </div>
+        <nav>
+          <a href="#about" class="nav-link">> About</a>
+          <a href="#education" class="nav-link">> Education</a>
+          <a href="#experience" class="nav-link">> Experience</a>
+          <a href="#projects" class="nav-link">> Projects</a>
+          <a href="#skills" class="nav-link">> Skills</a>
+          <a href="#contact" class="nav-link">> Contact</a>
+        </nav>
+        <div class="social-links">
+          <a href="https://github.com/MiguelMondragon0513" target="_blank" rel="noopener noreferrer" class="social-link">
+            <i class="fab fa-github"></i>
+            <span class="sr-only">GitHub</span>
+          </a>
+          <a href="https://www.linkedin.com/in/miguelmondragon0513/" target="_blank" rel="noopener noreferrer" class="social-link">
+            <i class="fab fa-linkedin"></i>
+            <span class="sr-only">LinkedIn</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-bg"></div>
+      <div class="container">
+        <div class="hero-content">
+          <div class="security-badge">
+            <div class="security-badge-text">SECURITY CLEARANCE: LEVEL 5</div>
+            <div class="security-badge-subtext">ACCESSING PERSONNEL FILE...</div>
+          </div>
+          <h1 class="hero-title glitch-text">
+            <span class="hero-title-green">MIGUEL</span> <span class="hero-title-red">MONDRAGON</span>
+          </h1>
+          <p class="hero-subtitle typewriter-text">
+            > Computer Engineering Specialist & Technology Operative
+          </p>
+          <div class="button-group">
+            <a href="#contact" class="btn btn-primary">
+              <span>INITIATE CONTACT</span>
+              <i class="fa-solid fa-virus btn-icon"></i>
+            </a>
+            <a href="#projects" class="btn btn-outline">
+              <span>ACCESS PROJECTS</span>
+              <i class="fa-solid fa-terminal btn-icon"></i>
+            </a>
+          </div>
+          <a href="#about" class="scroll-down">
+            <i class="fa-solid fa-chevron-down text-green-500 text-2xl"></i>
+            <span class="sr-only">Scroll Down</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+      <div class="section-corner-tl"></div>
+      <div class="container">
+        <div class="section-header">
+          <div class="pulse-dot"></div>
+          <h2 class="section-title">
+            <i class="fa-solid fa-terminal section-icon"></i>
+            PERSONNEL FILE
+          </h2>
+        </div>
+        <div class="grid grid-cols-1 grid-cols-2">
+          <div class="terminal-window">
+            <div class="terminal-header">
+              <div class="terminal-dot terminal-dot-red"></div>
+              <div class="terminal-dot terminal-dot-yellow"></div>
+              <div class="terminal-dot terminal-dot-green"></div>
+              <div class="terminal-path">terminal@umbrella-corp ~ $</div>
+            </div>
+            <div class="terminal-content">
+              <p class="terminal-line">
+                <span class="terminal-prompt">$</span> I'm a Computer Engineering student at Florida Polytechnic University with a passion for technology and problem-solving.
+              </p>
+              <p class="terminal-line">
+                <span class="terminal-prompt">$</span> My journey in engineering combines technical skills with practical experience.
+              </p>
+              <p class="terminal-line">
+                <span class="terminal-prompt">$</span> I'm bilingual (English/Spanish) and have experience in various programming languages and technologies.
+              </p>
+              <p class="terminal-line">
+                <span class="terminal-prompt">$</span> I'm constantly looking to expand my knowledge and take on new challenges in the field of computer engineering.
+              </p>
+              <div class="terminal-cursor"></div>
+            </div>
+          </div>
+          <div class="card card-red">
+            <div class="card-content">
+              <h3 class="card-title" style="color: #dc2626; margin-bottom: 1rem;">CONTACT INFORMATION</h3>
+              <div style="margin-bottom: 0.75rem;">
+                <div style="display: flex; align-items: center; gap: 0.75rem;">
+                  <i class="fa-solid fa-envelope text-green-500"></i>
+                  <a href="mailto:miguelmondra0513@gmail.com" style="color: #d1d5db; transition: color 0.2s;">
+                    miguelmondra0513@gmail.com
+                  </a>
+                </div>
+              </div>
+              <div style="margin-bottom: 0.75rem;">
+                <div style="display: flex; align-items: center; gap: 0.75rem;">
+                  <i class="fab fa-linkedin text-green-500"></i>
+                  <a href="https://www.linkedin.com/in/miguelmondragon0513/" target="_blank" rel="noopener noreferrer" style="color: #d1d5db; transition: color 0.2s;">
+                    linkedin.com/in/miguelmondragon0513
+                  </a>
+                </div>
+              </div>
+              <div style="margin-bottom: 0.75rem;">
+                <div style="display: flex; align-items: center; gap: 0.75rem;">
+                  <i class="fab fa-github text-green-500"></i>
+                  <a href="https://github.com/MiguelMondragon0513" target="_blank" rel="noopener noreferrer" style="color: #d1d5db; transition: color 0.2s;">
+                    github.com/MiguelMondragon0513
+                  </a>
+                </div>
+              </div>
+              <div class="progress-container">
+                <div class="progress-label">SECURITY CLEARANCE</div>
+                <div class="progress-bar">
+                  <div class="progress-value" style="width: 80%;"></div>
+                </div>
+                <div class="progress-stats">
+                  <span class="progress-label-text">LEVEL 4</span>
+                  <span class="progress-value-text">80%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education">
+      <div class="section-corner-br"></div>
+      <div class="container">
+        <div class="section-header">
+          <div class="pulse-dot pulse-dot-red"></div>
+          <h2 class="section-title section-title-red">
+            <i class="fa-solid fa-code section-icon"></i>
+            TRAINING RECORDS
+          </h2>
+        </div>
+        <div class="card card-red">
+          <div class="card-header">
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+              <h3 class="card-title">Bachelor of Science in Computer Engineering</h3>
+              <div style="font-size: 0.75rem; color: #dc2626; border: 1px solid #7f1d1d; padding: 0.25rem 0.5rem; border-radius: 0.25rem;">TOP SECRET</div>
+            </div>
+            <div class="card-description">Florida Polytechnic University</div>
+          </div>
+          <div class="card-content">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span style="color: #22c55e; font-family: monospace;">Expected Spring 2028</span>
+              <span class="badge badge-red">IN PROGRESS</span>
+            </div>
+            <div class="progress-container">
+              <div class="progress-label">TRAINING PROGRESS</div>
+              <div class="progress-bar">
+                <div class="progress-value progress-value-red" style="width: 25%;"></div>
+              </div>
+              <div class="progress-stats">
+                <span class="progress-label-text">YEAR 1</span>
+                <span class="progress-value-text-red">25%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience">
+      <div class="section-corner-tl"></div>
+      <div class="container">
+        <div class="section-header">
+          <div class="pulse-dot"></div>
+          <h2 class="section-title">
+            <i class="fa-solid fa-server section-icon"></i>
+            MISSION HISTORY
+          </h2>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 2rem;">
+          <div class="card">
+            <div class="card-header">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                <div>
+                  <h3 class="card-title">Horse Caretaker/Volunteer</h3>
+                  <div class="card-description">First Nature Foundation, Saint Cloud, Florida</div>
+                </div>
+                <span class="badge">April 2024 – May 2024</span>
+              </div>
+            </div>
+            <div class="card-content">
+              <ul class="list">
+                <li class="list-item">Worked with a team to ensure barn maintenance and horses were taken care of</li>
+                <li class="list-item">Managed feeding schedules and routines for horses ensuring constant and efficient care in time constraints</li>
+                <li class="list-item">Monitored horses' health following a strict safety protocol, showing attention to detail and risk management</li>
+              </ul>
+              <div class="progress-container">
+                <div class="progress-label" style="color: #22c55e;">MISSION STATUS</div>
+                <span class="badge">COMPLETED</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                <div>
+                  <h3 class="card-title">Customer Service/Customer Management</h3>
+                  <div class="card-description">Venzil Granite LLC, Kissimmee, Florida</div>
+                </div>
+                <span class="badge">June 2022 – January 2024</span>
+              </div>
+            </div>
+            <div class="card-content">
+              <ul class="list">
+                <li class="list-item">Interacted with 40+ clients addressing custom design needs, resolving issues and ensuring satisfaction in a project, developing skills in communication, problem solving, and client-based interactions</li>
+                <li class="list-item">Assisted in coordinating the installation of granite products optimizing workflow for maximum efficiency</li>
+              </ul>
+              <div class="progress-container">
+                <div class="progress-label" style="color: #22c55e;">MISSION STATUS</div>
+                <span class="badge">COMPLETED</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+      <div class="section-corner-br"></div>
+      <div class="container">
+        <div class="section-header">
+          <div class="pulse-dot pulse-dot-red"></div>
+          <h2 class="section-title section-title-red">
+            <i class="fa-solid fa-microchip section-icon"></i>
+            RESEARCH & DEVELOPMENT
+          </h2>
+        </div>
+        <div class="card card-red">
+          <div class="card-header">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+              <div>
+                <h3 class="card-title">Arduino Mini Robot</h3>
+                <div class="card-description">Hackathon, Lakeland, Florida</div>
+              </div>
+              <span class="badge badge-red">July 2024</span>
+            </div>
+          </div>
+          <div class="card-content">
+            <ul class="list">
+              <li class="list-item-red">Constructed a robot using 3D printed parts to pick up blocks that were set down on the table with little information</li>
+              <li class="list-item-red">Developed a strategy in a team of 4 to build and code the robot in 4 hours</li>
+              <li class="list-item-red">Learned to use Arduino in 4-hour time span and coded the robot to function with its given task</li>
+            </ul>
+            <div class="progress-container">
+              <div class="progress-label">PROJECT STATUS</div>
+              <span class="badge badge-red">PROTOTYPE</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Involvement Section -->
+    <section id="involvement">
+      <div class="section-corner-tl"></div>
+      <div class="container">
+        <div class="section-header">
+          <div class="pulse-dot"></div>
+          <h2 class="section-title">
+            <i class="fa-solid fa-globe section-icon"></i>
+            OPERATIVE NETWORKS
+          </h2>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 2rem;">
+          <div class="card">
+            <div class="card-header">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                <div>
+                  <h3 class="card-title">Society of Hispanic Professional Engineers</h3>
+                  <div class="card-description">Florida Polytechnic University, Lakeland, Florida</div>
+                </div>
+                <span class="badge">August 2024 – Present</span>
+              </div>
+            </div>
+            <div class="card-content">
+              <ul class="list">
+                <li class="list-item">Participated in 20+ Technical workshops and challenges improving problem solving skills and hands on experience</li>
+                <li class="list-item">Worked with members on initiatives such as workshops, outreach or competitions developing project management, and teamwork</li>
+              </ul>
+              <div class="progress-container">
+                <div class="progress-label" style="color: #22c55e;">NETWORK STATUS</div>
+                <span class="badge">ACTIVE</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                <div>
+                  <h3 class="card-title">Overwatch Esports</h3>
+                  <div class="card-description">Florida Polytechnic University, Lakeland, Florida</div>
+                </div>
+                <span class="badge">September 2024 – Present</span>
+              </div>
+            </div>
+            <div class="card-content">
+              <ul class="list">
+                <li class="list-item">Developing strategies in fast paced, competitive environment, optimizing team play with 6 players in real time analyzing in game data</li>
+                <li class="list-item">Used various platforms and software to analyze performance, stream matches and collaborate with teammates demonstrating comfort in technology, system integrations and trouble shooting</li>
+              </ul>
+              <div class="progress-container">
+                <div class="progress-label" style="color: #22c55e;">NETWORK STATUS</div>
+                <span class="badge">ACTIVE</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                <div>
+                  <h3 class="card-title">Volleyball Club</h3>
+                  <div class="card-description">Florida Polytechnic University, Lakeland, Florida</div>
+                </div>
+                <span class="badge">August 2024 – Present</span>
+              </div>
+            </div>
+            <div class="card-content">
+              <ul class="list">
+                <li class="list-item">Embraced a growth mindset consistently getting better using performance gaps and using practices and feedback to improve</li>
+                <li class="list-item">Worked with teams of 3-6 to execute complex plays and strategies demonstrating strong interpersonal skills and communication skills</li>
+              </ul>
+              <div class="progress-container">
+                <div class="progress-label" style="color: #22c55e;">NETWORK STATUS</div>
+                <span class="badge">ACTIVE</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+      <div class="section-corner-br"></div>
+      <div class="container">
+        <div class="section-header">
+          <div class="pulse-dot pulse-dot-red"></div>
+          <h2 class="section-title section-title-red">
+            <i class="fa-solid fa-database section-icon"></i>
+            OPERATIVE CAPABILITIES
+          </h2>
+        </div>
+        <div class="grid grid-cols-1 grid-cols-2">
+          <div class="card card-red">
+            <div class="card-header">
+              <h3 class="card-title">Technical Skills</h3>
+            </div>
+            <div class="card-content">
+              <div class="badge-group">
+                <span class="badge badge-red">JavaScript</span>
+                <span class="badge badge-red">C++</span>
+                <span class="badge badge-red">Arduino IDE</span>
+                <span class="badge badge-red">Unity</span>
+                <span class="badge badge-red">Microsoft Word</span>
+                <span class="badge badge-red">Microsoft Excel</span>
+                <span class="badge badge-red">Microsoft PowerPoint</span>
+              </div>
+              <div style="margin-top: 1.5rem;">
+                <div class="progress-label">SKILL PROFICIENCY</div>
+                <div style="margin-top: 1rem; margin-bottom: 1rem;">
+                  <div style="display: flex; justify-content: space-between; font-size: 0.75rem; margin-bottom: 0.25rem;">
+                    <span style="color: #9ca3af;">JavaScript</span>
+                    <span style="color: #f87171;">75%</span>
+                  </div>
+                  <div class="progress-bar">
+                    <div class="progress-value progress-value-red" style="width: 75%;"></div>
+                  </div>
+                </div>
+                <div style="margin-bottom: 1rem;">
+                  <div style="display: flex; justify-content: space-between; font-size: 0.75rem; margin-bottom: 0.25rem;">
+                    <span style="color: #9ca3af;">C++</span>
+                    <span style="color: #f87171;">80%</span>
+                  </div>
+                  <div class="progress-bar">
+                    <div class="progress-value progress-value-red" style="width: 80%;"></div>
+                  </div>
+                </div>
+                <div>
+                  <div style="display: flex; justify-content: space-between; font-size: 0.75rem; margin-bottom: 0.25rem;">
+                    <span style="color: #9ca3af;">Arduino</span>
+                    <span style="color: #f87171;">70%</span>
+                  </div>
+                  <div class="progress-bar">
+                    <div class="progress-value progress-value-red" style="width: 70%;"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card card-red">
+            <div class="card-header">
+              <h3 class="card-title">Languages</h3>
+            </div>
+            <div class="card-content">
+              <div class="badge-group" style="margin-bottom: 1.5rem;">
+                <span class="badge badge-red">English</span>
+                <span class="badge badge-red">Spanish</span>
+              </div>
+              <div style="margin-bottom: 1rem;">
+                <div style="display: flex; justify-content: space-between; font-size: 0.75rem; margin-bottom: 0.25rem;">
+                  <span style="color: #9ca3af;">English</span>
+                  <span style="color: #f87171;">100%</span>
+                </div>
+                <div class="progress-bar">
+                  <div class="progress-value progress-value-red" style="width: 100%;"></div>
+                </div>
+              </div>
+              <div>
+                <div style="display: flex; justify-content: space-between; font-size: 0.75rem; margin-bottom: 0.25rem;">
+                  <span style="color: #9ca3af;">Spanish</span>
+                  <span style="color: #f87171;">100%</span>
+                </div>
+                <div class="progress-bar">
+                  <div class="progress-value progress-value-red" style="width: 100%;"></div>
+                </div>
+              </div>
+              <div class="progress-container">
+                <div class="progress-label">COMMUNICATION CLEARANCE</div>
+                <span class="badge badge-red">LEVEL 5 - AUTHORIZED</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+      <div class="section-corner-tl"></div>
+      <div class="container">
+        <div class="section-header">
+          <div class="pulse-dot"></div>
+          <h2 class="section-title">
+            <i class="fa-solid fa-envelope section-icon"></i>
+            SECURE COMMUNICATION
+          </h2>
+        </div>
+        <div class="grid grid-cols-1 grid-cols-2">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Establish Connection</h3>
+              <div class="card-description">Secure channels available for contact</div>
+            </div>
+            <div class="card-content">
+              <div style="margin-bottom: 1rem;">
+                <a href="mailto:miguelmondra0513@gmail.com" class="btn btn-primary" style="width: 100%; background-color: #15803d; border-color: #22c55e;">
+                  <i class="fa-solid fa-envelope btn-icon" style="margin-right: 0.5rem;"></i>
+                  SEND ENCRYPTED MESSAGE
+                </a>
+              </div>
+              <div style="margin-bottom: 1rem;">
+                <a href="https://www.linkedin.com/in/miguelmondragon0513/" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="width: 100%; background-color: #1d4ed8; border-color: #3b82f6;">
+                  <i class="fab fa-linkedin btn-icon" style="margin-right: 0.5rem;"></i>
+                  CONNECT VIA NETWORK
+                </a>
+              </div>
+              <div style="margin-bottom: 1rem;">
+                <a href="https://github.com/MiguelMondragon0513" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="width: 100%; background-color: #1f2937; border-color: #4b5563;">
+                  <i class="fab fa-github btn-icon" style="margin-right: 0.5rem;"></i>
+                  ACCESS CODE REPOSITORY
+                </a>
+              </div>
+              <div class="progress-container">
+                <div class="progress-label" style="color: #22c55e;">COMMUNICATION STATUS</div>
+                <div class="status-indicator">
+                  <div class="status-dot"></div>
+                  <span class="status-text">CHANNELS SECURE</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card card-red">
+            <div class="card-content">
+              <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
+                <i class="fa-solid fa-shield-halved" style="color: #dc2626;"></i>
+                <h3 style="font-family: monospace; font-size: 1.25rem; font-weight: bold; color: #dc2626;">OPERATIVE LOCATION</h3>
+              </div>
+              <p style="color: #d1d5db; margin-bottom: 0.5rem;">Lakeland, Florida</p>
+              <p style="color: #d1d5db; margin-bottom: 1.5rem;">(407) 954-0922</p>
+              <div class="progress-container">
+                <div class="progress-label">SYSTEM STATUS</div>
+                <div style="margin-top: 0.5rem; margin-bottom: 0.5rem;">
+                  <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span style="color: #9ca3af;">CPU</span>
+                    <span style="color: #22c55e;">ONLINE</span>
+                  </div>
+                </div>
+                <div style="margin-bottom: 0.5rem;">
+                  <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span style="color: #9ca3af;">MEMORY</span>
+                    <span style="color: #22c55e;">OPTIMAL</span>
+                  </div>
+                </div>
+                <div>
+                  <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span style="color: #9ca3af;">NETWORK</span>
+                    <span style="color: #22c55e;">CONNECTED</span>
+                  </div>
+                </div>
+              </div>
+              <div style="font-family: monospace; font-size: 0.875rem; color: #22c55e; border-top: 1px solid rgba(220, 38, 38, 0.5); padding-top: 1rem; margin-top: 1.5rem;">
+                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.25rem;">
+                  <div style="display: inline-block; width: 0.75rem; height: 0.75rem; background-color: #22c55e; border-radius: 9999px; animation: pulse 2s infinite;"></div>
+                  <span>STATUS: AVAILABLE FOR DEPLOYMENT</span>
+                </div>
+                <div style="font-size: 0.75rem; color: #9ca3af;">
+                  Last system update: <script>document.write(new Date().toLocaleDateString());</script>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-logo">
+          <i class="fa-solid fa-shield-halved" style="color: #dc2626;"></i>
+          <span class="footer-logo-text">
+            <span class="footer-logo-text-green">MIGUEL_MONDRAGON</span>
+          </span>
+        </div>
+        <div class="footer-info">
+          <p class="footer-copyright">
+            &copy; <script>document.write(new Date().getFullYear());</script> Miguel Mondragon. All rights reserved.
+          </p>
+          <p class="footer-security">
+            SECURITY LEVEL: CLASSIFIED
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Simple JavaScript for interactive elements
+    document.addEventListener('DOMContentLoaded', function() {
+      // Smooth scrolling for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          e.preventDefault();
+          const targetId = this.getAttribute('href');
+          const targetElement = document.querySelector(targetId);
+          if (targetElement) {
+            window.scrollTo({
+              top: targetElement.offsetTop,
+              behavior: 'smooth'
+            });
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
